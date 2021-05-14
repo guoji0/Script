@@ -1,0 +1,1099 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results>
+Extra Header Start
+Extra Header End
+Extra Header Start
+Extra Header End
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/DeviceManager.cpp" line="618" id="uninit" subid="uninitvar" severity="Serious" msg="Uninitialized variable: result" web_identify="{&quot;identify&quot;:&quot;result&quot;}" func_info="char DeviceManager::getDeviceNums ( MM_DEVICE_TYPE devType )" content="608:         break;
+609:     case DEVICE_TYCAM:
+610:     case DEVICE_TISCAM:
+611:     case DEVICE_IPCAM:
+612:         result = mpCameraManager-&gt;getCamNum(devType);
+613:         break;
+614:     default:
+615:         MM_ERROR(&quot;No such device type %d&quot;, devType);
+616:         break;
+617:     }
+618:     return result;
+619: }
+620: 
+621: boost::shared_ptr&lt;CameraManager&gt; DeviceManager::getCameraManager()
+622: {
+623:     return mpCameraManager;
+624: }
+625: 
+626: boost::shared_ptr&lt;LidarManager&gt; DeviceManager::getLidarManager()
+627: {
+628:     return mpLidarManager;
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/LiDAR/LMS1xx/LMS1xx.cpp" line="106" id="bufoverrun" subid="funcRetLengthAsIndex" severity="Serious" msg="Index [len] which is returned form [read] may cause index out of bound." web_identify="{&quot;identify&quot;:&quot;len&quot;}" func_info="void LMS1xx::stopMeas ( )" content="96: void LMS1xx::stopMeas()
+97: {
+98:   char buf[100];
+99:   sprintf(buf, &quot;%c%s%c&quot;, 0x02, &quot;sMN LMCstopmeas&quot;, 0x03);
+100: 
+101:   write(socket_fd_, buf, strlen(buf));
+102: 
+103:   int len = read(socket_fd_, buf, 100);
+104:   if (buf[0] != 0x02)
+105:     std::cout &lt;&lt; &quot;invalid packet recieved&quot; &lt;&lt; std::endl;
+106:   buf[len] = 0;
+107: }
+108: 
+109: status_t LMS1xx::queryStatus()
+110: {
+111:   char buf[100];
+112:   sprintf(buf, &quot;%c%s%c&quot;, 0x02, &quot;sRN STlms&quot;, 0x03);
+113: 
+114:   write(socket_fd_, buf, strlen(buf));
+115: 
+116:   int len = read(socket_fd_, buf, 100);
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/LiDAR/LMS1xx/LMS1xx.cpp" line="119" id="bufoverrun" subid="funcRetLengthAsIndex" severity="Serious" msg="Index [len] which is returned form [read] may cause index out of bound." web_identify="{&quot;identify&quot;:&quot;len&quot;}" func_info="status_t LMS1xx::queryStatus ( )" content="109: status_t LMS1xx::queryStatus()
+110: {
+111:   char buf[100];
+112:   sprintf(buf, &quot;%c%s%c&quot;, 0x02, &quot;sRN STlms&quot;, 0x03);
+113: 
+114:   write(socket_fd_, buf, strlen(buf));
+115: 
+116:   int len = read(socket_fd_, buf, 100);
+117:   if (buf[0] != 0x02)
+118:     std::cout &lt;&lt; &quot;invalid packet recieved&quot; &lt;&lt; std::endl;
+119:   buf[len] = 0;
+120: 
+121:   int ret;
+122:   sscanf((buf + 10), &quot;%d&quot;, &amp;ret);
+123: 
+124:   return (status_t) ret;
+125: }
+126: 
+127: void LMS1xx::login()
+128: {
+129:   char buf[100];
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/LiDAR/LMS1xx/LMS1xx.cpp" line="154" id="bufoverrun" subid="funcRetLengthAsIndex" severity="Serious" msg="Index [len] which is returned form [read] may cause index out of bound." web_identify="{&quot;identify&quot;:&quot;len&quot;}" func_info="void LMS1xx::login ( )" content="144:     FD_ZERO(&amp;readset);
+145:     FD_SET(socket_fd_, &amp;readset);
+146:     result = select(socket_fd_ + 1, &amp;readset, NULL, NULL, &amp;timeout);
+147: 
+148:   }
+149:   while (result &lt;= 0);
+150: 
+151:   int len = read(socket_fd_, buf, 100);
+152:   if (buf[0] != 0x02)
+153:     std::cout &lt;&lt; &quot;invalid packet recieved&quot; &lt;&lt; std::endl;
+154:   buf[len] = 0;
+155: }
+156: 
+157: scanCfg LMS1xx::getScanCfg() const
+158: {
+159:   scanCfg cfg;
+160:   char buf[100];
+161:   sprintf(buf, &quot;%c%s%c&quot;, 0x02, &quot;sRN LMPscancfg&quot;, 0x03);
+162: 
+163:   write(socket_fd_, buf, strlen(buf));
+164: 
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/LiDAR/LMS1xx/LMS1xx.cpp" line="168" id="bufoverrun" subid="funcRetLengthAsIndex" severity="Serious" msg="Index [len] which is returned form [read] may cause index out of bound." web_identify="{&quot;identify&quot;:&quot;len&quot;}" func_info="scanCfg LMS1xx::getScanCfg ( ) const" content="158: {
+159:   scanCfg cfg;
+160:   char buf[100];
+161:   sprintf(buf, &quot;%c%s%c&quot;, 0x02, &quot;sRN LMPscancfg&quot;, 0x03);
+162: 
+163:   write(socket_fd_, buf, strlen(buf));
+164: 
+165:   int len = read(socket_fd_, buf, 100);
+166:   if (buf[0] != 0x02)
+167:     std::cout &lt;&lt; &quot;invalid packet recieved&quot; &lt;&lt; std::endl;
+168:   buf[len] = 0;
+169: 
+170:   sscanf(buf + 1, &quot;%*s %*s %X %*d %X %X %X&quot;, &amp;cfg.scaningFrequency,
+171:          &amp;cfg.angleResolution, &amp;cfg.startAngle, &amp;cfg.stopAngle);
+172:   return cfg;
+173: }
+174: 
+175: void LMS1xx::setScanCfg(const scanCfg &amp;cfg)
+176: {
+177:   char buf[100];
+178:   sprintf(buf, &quot;%c%s %X +1 %X %X %X%c&quot;, 0x02, &quot;sMN mLMPsetscancfg&quot;,
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/LiDAR/LMS1xx/LMS1xx.cpp" line="229" id="bufoverrun" subid="funcRetLengthAsIndex" severity="Serious" msg="Index [len] which is returned form [read] may cause index out of bound." web_identify="{&quot;identify&quot;:&quot;len&quot;}" func_info="void LMS1xx::scanContinous ( int start )" content="219:   char buf[100];
+220:   sprintf(buf, &quot;%c%s %d%c&quot;, 0x02, &quot;sEN LMDscandata&quot;, start, 0x03);
+221: 
+222:   write(socket_fd_, buf, strlen(buf));
+223: 
+224:   int len = read(socket_fd_, buf, 100);
+225: 
+226:   if (buf[0] != 0x02)
+227:     std::cerr &lt;&lt; &quot;invalid packet recieved&quot; &lt;&lt; std::endl;
+228: 
+229:   buf[len] = 0;
+230: }
+231: 
+232: bool LMS1xx::getScanData(scanData* scan_data)
+233: {
+234:   fd_set rfds;
+235:   FD_ZERO(&amp;rfds);
+236:   FD_SET(socket_fd_, &amp;rfds);
+237: 
+238:   // Block a total of up to 100ms waiting for more data from the laser.
+239:   while (1)
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/LiDAR/LMS1xx/LMS1xx.cpp" line="469" id="bufoverrun" subid="funcRetLengthAsIndex" severity="Serious" msg="Index [len] which is returned form [read] may cause index out of bound." web_identify="{&quot;identify&quot;:&quot;len&quot;}" func_info="void LMS1xx::saveConfig ( )" content="459: {
+460:   char buf[100];
+461:   sprintf(buf, &quot;%c%s%c&quot;, 0x02, &quot;sMN mEEwriteall&quot;, 0x03);
+462: 
+463:   write(socket_fd_, buf, strlen(buf));
+464: 
+465:   int len = read(socket_fd_, buf, 100);
+466: 
+467:   if (buf[0] != 0x02)
+468:     std::cout &lt;&lt; &quot;invalid packet recieved&quot; &lt;&lt; std::endl;
+469:   buf[len] = 0;
+470: }
+471: 
+472: void LMS1xx::startDevice()
+473: {
+474:   char buf[100];
+475:   sprintf(buf, &quot;%c%s%c&quot;, 0x02, &quot;sMN Run&quot;, 0x03);
+476: 
+477:   write(socket_fd_, buf, strlen(buf));
+478: 
+479:   int len = read(socket_fd_, buf, 100);
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/LiDAR/LMS1xx/LMS1xx.cpp" line="483" id="bufoverrun" subid="funcRetLengthAsIndex" severity="Serious" msg="Index [len] which is returned form [read] may cause index out of bound." web_identify="{&quot;identify&quot;:&quot;len&quot;}" func_info="void LMS1xx::startDevice ( )" content="473: {
+474:   char buf[100];
+475:   sprintf(buf, &quot;%c%s%c&quot;, 0x02, &quot;sMN Run&quot;, 0x03);
+476: 
+477:   write(socket_fd_, buf, strlen(buf));
+478: 
+479:   int len = read(socket_fd_, buf, 100);
+480: 
+481:   if (buf[0] != 0x02)
+482:     std::cout &lt;&lt; &quot;invalid packet recieved&quot; &lt;&lt; std::endl;
+483:   buf[len] = 0;
+484: }
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/LiDAR/LMS1xx/LMS1xx.cpp" line="93" id="bufoverrun" subid="funcRetLengthAsIndex" severity="Serious" msg="Index [len] which is returned form [read] may cause index out of bound." web_identify="{&quot;identify&quot;:&quot;len&quot;}" func_info="void LMS1xx::startMeas ( )" content="83: void LMS1xx::startMeas()
+84: {
+85:   char buf[100];
+86:   sprintf(buf, &quot;%c%s%c&quot;, 0x02, &quot;sMN LMCstartmeas&quot;, 0x03);
+87: 
+88:   write(socket_fd_, buf, strlen(buf));
+89: 
+90:   int len = read(socket_fd_, buf, 100);
+91:   if (buf[0] != 0x02)
+92:     std::cout &lt;&lt; &quot;invalid packet recieved&quot; &lt;&lt; std::endl;
+93:   buf[len] = 0;
+94: }
+95: 
+96: void LMS1xx::stopMeas()
+97: {
+98:   char buf[100];
+99:   sprintf(buf, &quot;%c%s%c&quot;, 0x02, &quot;sMN LMCstopmeas&quot;, 0x03);
+100: 
+101:   write(socket_fd_, buf, strlen(buf));
+102: 
+103:   int len = read(socket_fd_, buf, 100);
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/LiDAR/rslidar/rawdata.cpp" line="618" id="logic" subid="selfAssignment" severity="Warning" msg="Redundant assignment of &apos;realPwr&apos; to itself." web_identify="{&quot;identify&quot;:&quot;realPwr&quot;}" func_info="float RawData::calibrateIntensity ( float intensity , int calIdx , int distance )" content="608:         realPwr = realPwr * 4.0f;
+609:       else if ((int)realPwr &gt;= 126 &amp;&amp; (int)realPwr &lt; 226)
+610:         realPwr = (realPwr - 125.0f) * 16.0f + 500.0f;
+611:       else
+612:         realPwr = (realPwr - 225.0f) * 256.0f + 2100.0f;
+613:     }
+614:     else if (intensity_mode_ == 2)
+615:     {
+616:       // the caculation for the firmware after T6R23V8(16) and T9R23V6(32)
+617:       if ((int)realPwr &lt; 64)
+618:         realPwr = realPwr;
+619:       else if ((int)realPwr &gt;= 64 &amp;&amp; (int)realPwr &lt; 176)
+620:         realPwr = (realPwr - 64.0f) * 4.0f + 64.0f;
+621:       else
+622:         realPwr = (realPwr - 176.0f) * 16.0f + 512.0f;
+623:     }
+624:     else
+625:     {
+626:       MM_ERROR(&quot;[cloud][rawdata] The intensity mode is not right&quot;);
+627:     }
+628: 
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/PLC/AppPLC.cpp" line="72" id="nullpointer" subid="dereferenceAfterCheck" severity="Serious" msg="Comparing [mpHost] to null at line 55 implies that [mpHost ] might be null.Dereferencing null pointer [mpHost]." web_identify="{&quot;identify&quot;:&quot;mpHost&quot;}" func_info="MM_STATUS AppPLC::Init ( std::string ip )" content="62:             if ((mSockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1)
+63:             {
+64:                 MM_INFO(&quot;[AppPLC] fail to establish a socket&quot;);
+65:                 ret = MM_STATUS_NOT_INITED;
+66:             }
+67:             MM_INFO(&quot;[AppPLC] Success to establish a socket...&quot;);
+68: 
+69:             /*init sockaddr_in*/
+70:             mServAddr.sin_family = AF_INET;
+71:             mServAddr.sin_port = htons(mPort);
+72:             mServAddr.sin_addr = *((struct in_addr *)mpHost-&gt;h_addr);
+73:             bzero(&amp;(mServAddr.sin_zero), 8);
+74: 
+75:             if (connect(mSockfd, (struct sockaddr *)&amp;mServAddr, sizeof(struct sockaddr_in)) == -1)
+76:             {
+77:                 MM_INFO(&quot;[AppPLC] fail to connect the socket&quot;);
+78:                 ret = MM_STATUS_NOT_INITED;
+79:             }
+80:             else
+81:             {
+82:                 MM_INFO(&quot;[AppPLC] Success to connect the socket...\n&quot;);
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/progs/demos/Fractals/fractals.c" line="246" id="logic" subid="InvalidVarArgs" severity="Critical" msg="The count of parameters mismatches the format string in sscanf" web_identify="{&quot;identify&quot;:&quot;sscanf&quot;}" func_info="void readConfigFile ( char * fnme )" content="236:     /* Read a comment line */
+237:     checkedFGets ( inputline, sizeof ( inputline ), fptr ) ;
+238: 
+239:     /* Read the window title */
+240:     checkedFGets ( inputline, sizeof ( inputline ), fptr ) ;
+241:     /* We assume here that this line will not exceed 79 characters plus a 
+242:        newline (window_title is 80 characters long). That&apos;ll cause a buffer 
+243:        overflow. For a simple program like  this, though, we&apos;re letting it 
+244:        slide! 
+245:     */
+246:     sscanf ( inputline, &quot;%[a-zA-Z0-9!@#$%^&amp;*()+=/\\_-\&quot; ]&quot;, window_title ) ; 
+247: 
+248:     /* Read a comment line */
+249:     checkedFGets ( inputline, sizeof ( inputline ), fptr ) ;
+250: 
+251:     /* Read the number of affine transformations */
+252:     checkedFGets ( inputline, sizeof ( inputline ), fptr ) ;
+253:     sscanf ( inputline, &quot;%d&quot;, &amp;num_trans ) ;
+254: 
+255:     affine = (AffineTrans *)malloc ( num_trans * sizeof(AffineTrans) ) ;
+256: 
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/progs/demos/Fractals/fractals.c" line="309" id="memleak" subid="resourceLeak" severity="Warning" msg="Resource leak: fptr" web_identify="{&quot;identify&quot;:&quot;fptr&quot;}" func_info="" content="299:     determ = m00 * m11 - m01 * m10 ;
+300: 
+301:     if ( fabs ( determ ) &gt; 1.e-6 )
+302:     {
+303:       affine[i].statx = (  m11 * affine[i].b0 - m01 * affine[i].b1 ) / determ ;
+304:       affine[i].staty = ( -m10 * affine[i].b0 + m00 * affine[i].b1 ) / determ ;
+305:     }
+306:     else
+307:       affine[i].statx = affine[i].staty = 0.0 ;
+308:   }
+309: }
+310: 
+311: int 
+312: main(int argc, char *argv[])
+313: {
+314:   glutInitWindowSize(500, 250);
+315:   glutInitWindowPosition ( 140, 140 );
+316:   glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE );
+317:   glutInit(&amp;argc, argv);
+318: 
+319:   if ( argc &gt; 1 )
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/progs/demos/Fractals_random/fractals_random.c" line="290" id="logic" subid="InvalidVarArgs" severity="Critical" msg="The count of parameters mismatches the format string in sscanf" web_identify="{&quot;identify&quot;:&quot;sscanf&quot;}" func_info="void readConfigFile ( char * fnme )" content="280:     /* Read a comment line */
+281:     checkedFGets ( inputline, sizeof ( inputline ), fptr ) ;
+282: 
+283:     /* Read the window title */
+284:     checkedFGets ( inputline, sizeof ( inputline ), fptr ) ;
+285:     /* We assume here that this line will not exceed 79 characters plus a 
+286:        newline (window_title is 80 characters long). That&apos;ll cause a buffer 
+287:        overflow. For a simple program like  this, though, we&apos;re letting it 
+288:        slide! 
+289:     */
+290:     sscanf ( inputline, &quot;%[a-zA-Z0-9!@#$%^&amp;*()+=/\\_-\&quot; ]&quot;, window_title ) ; 
+291: 
+292:     /* Read a comment line */
+293:     checkedFGets ( inputline, sizeof ( inputline ), fptr ) ;
+294: 
+295:     /* Read the number of affine transformations */
+296:     checkedFGets ( inputline, sizeof ( inputline ), fptr ) ;
+297:     sscanf ( inputline, &quot;%d&quot;, &amp;num_trans ) ;
+298: 
+299:     affine = (AffineTrans *)malloc ( num_trans * sizeof(AffineTrans) ) ;
+300: 
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/progs/demos/Fractals_random/fractals_random.c" line="353" id="memleak" subid="resourceLeak" severity="Warning" msg="Resource leak: fptr" web_identify="{&quot;identify&quot;:&quot;fptr&quot;}" func_info="" content="343:     determ = m00 * m11 - m01 * m10 ;
+344: 
+345:     if ( fabs ( determ ) &gt; 1.e-6 )
+346:     {
+347:       affine[i].statx = (  m11 * affine[i].b0 - m01 * affine[i].b1 ) / determ ;
+348:       affine[i].staty = ( -m10 * affine[i].b0 + m00 * affine[i].b1 ) / determ ;
+349:     }
+350:     else
+351:       affine[i].statx = affine[i].staty = 0.0 ;
+352:   }
+353: }
+354: 
+355: int 
+356: main(int argc, char *argv[])
+357: {
+358:   glutInitDisplayMode( GLUT_RGB | GLUT_SINGLE );
+359: 
+360:   glutInitWindowSize(500, 250);
+361:   glutInitWindowPosition ( 140, 140 ) ;
+362:   glutInit(&amp;argc, argv);
+363: 
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/android/fg_main_android.c" line="439" id="nullpointer" subid="dereferenceAfterCheck" severity="Serious" msg="Comparing [window] to null at line 414 implies that [window ] might be null.Dereferencing null pointer [window]. The error is in macros." web_identify="{&quot;identify&quot;:&quot;window&quot;}" func_info="void fgPlatformProcessSingleEvent ( )" content="429:   while ((ident=ALooper_pollAll(0, NULL, &amp;events, (void**)&amp;source)) &gt;= 0) {
+430:     /* Process this event. */
+431:     if (source != NULL) {
+432:       source-&gt;process(source-&gt;app, source);
+433:     }
+434:   }
+435: 
+436:   /* If we&apos;re not in RESUME state, Android paused us, so wait */
+437:   struct android_app* app = fgDisplay.pDisplay.app;
+438:   if (app-&gt;destroyRequested != 1 &amp;&amp; app-&gt;activityState != APP_CMD_RESUME) {
+439:       INVOKE_WCB(*window, AppStatus, (GLUT_APPSTATUS_PAUSE));
+440: 
+441:     int FOREVER = -1;
+442:     while (app-&gt;destroyRequested != 1 &amp;&amp; (app-&gt;activityState != APP_CMD_RESUME)) {
+443:       if ((ident=ALooper_pollOnce(FOREVER, NULL, &amp;events, (void**)&amp;source)) &gt;= 0) {
+444:         /* Process this event. */
+445:         if (source != NULL) {
+446:           source-&gt;process(source-&gt;app, source);
+447:         }
+448:       }
+449:     }
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/egl/fg_state_egl.c" line="162" id="memleak" subid="memleakOnRealloc" severity="Warning" msg="Common realloc mistake: &apos;array&apos; nulled but not freed upon failure" web_identify="{&quot;identify&quot;:&quot;array&quot;}" func_info="" content="152: 	  eglGetConfigAttrib(fgDisplay.pDisplay.egl.Display,
+153: 			     configArray[i], attribute_name, &amp;value);
+154: 	  if (value &gt; previous_value)
+155: 	    {
+156: 	      previous_value = value;
+157: 	      array[*size] = value;
+158: 	      (*size)++;
+159: 	    }
+160: 	}
+161: 	
+162: 	array = realloc(array, sizeof(int) * (*size));
+163:       }
+164:       free(configArray);
+165:       break;
+166: 
+167:     default:
+168:       break;
+169:     }
+170: 
+171:   return array;
+172: }
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_geometry.c" line="1598" id="memleak" subid="deallocDealloc" severity="Warning" msg="Deallocating a deallocated pointer: vertices" web_identify="{&quot;identify&quot;:&quot;vertices&quot;}" func_info="" content="1588:         fghSierpinskiSpongeGenerate ( numLevels, offset, scale, vertices, normals );
+1589: 
+1590:         /* Draw and cleanup */
+1591:         if (useWireMode)
+1592:             fghDrawGeometryWire (vertices,normals,numVert,
+1593:                                  NULL,numFace,TETRAHEDRON_NUM_EDGE_PER_FACE,GL_LINE_LOOP,
+1594:                                  NULL,0,0);
+1595:         else
+1596:             fghDrawGeometrySolid(vertices,normals,NULL,numVert,NULL,1,0);
+1597: 
+1598:         free(vertices);
+1599:         free(normals );
+1600:     }
+1601: }
+1602: 
+1603: 
+1604: static void fghSphere( GLfloat radius, GLint slices, GLint stacks, GLboolean useWireMode )
+1605: {
+1606:     int i,j,idx, nVert;
+1607:     GLfloat *vertices, *normals;
+1608: 
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_geometry.c" line="1599" id="memleak" subid="deallocDealloc" severity="Warning" msg="Deallocating a deallocated pointer: normals" web_identify="{&quot;identify&quot;:&quot;normals&quot;}" func_info="" content="1589: 
+1590:         /* Draw and cleanup */
+1591:         if (useWireMode)
+1592:             fghDrawGeometryWire (vertices,normals,numVert,
+1593:                                  NULL,numFace,TETRAHEDRON_NUM_EDGE_PER_FACE,GL_LINE_LOOP,
+1594:                                  NULL,0,0);
+1595:         else
+1596:             fghDrawGeometrySolid(vertices,normals,NULL,numVert,NULL,1,0);
+1597: 
+1598:         free(vertices);
+1599:         free(normals );
+1600:     }
+1601: }
+1602: 
+1603: 
+1604: static void fghSphere( GLfloat radius, GLint slices, GLint stacks, GLboolean useWireMode )
+1605: {
+1606:     int i,j,idx, nVert;
+1607:     GLfloat *vertices, *normals;
+1608: 
+1609:     /* Generate vertices and normals */
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_geometry.c" line="1661" id="memleak" subid="deallocDealloc" severity="Warning" msg="Deallocating a deallocated pointer: sliceIdx" web_identify="{&quot;identify&quot;:&quot;sliceIdx&quot;}" func_info="" content="1651:             }
+1652:             sliceIdx[idx++] = nVert-1;              /* zero based index, last element in array... */
+1653:         }
+1654: 
+1655:         /* draw */
+1656:         fghDrawGeometryWire(vertices,normals,nVert,
+1657:             sliceIdx,slices,stacks+1,GL_LINE_STRIP,
+1658:             stackIdx,stacks-1,slices);
+1659:         
+1660:         /* cleanup allocated memory */
+1661:         free(sliceIdx);
+1662:         free(stackIdx);
+1663:     }
+1664:     else
+1665:     {
+1666:         /* First, generate vertex index arrays for drawing with glDrawElements
+1667:          * All stacks, including top and bottom are covered with a triangle
+1668:          * strip.
+1669:          */
+1670:         GLushort  *stripIdx;
+1671:         /* Create index vector */
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_geometry.c" line="1662" id="memleak" subid="deallocDealloc" severity="Warning" msg="Deallocating a deallocated pointer: stackIdx" web_identify="{&quot;identify&quot;:&quot;stackIdx&quot;}" func_info="" content="1652:             sliceIdx[idx++] = nVert-1;              /* zero based index, last element in array... */
+1653:         }
+1654: 
+1655:         /* draw */
+1656:         fghDrawGeometryWire(vertices,normals,nVert,
+1657:             sliceIdx,slices,stacks+1,GL_LINE_STRIP,
+1658:             stackIdx,stacks-1,slices);
+1659:         
+1660:         /* cleanup allocated memory */
+1661:         free(sliceIdx);
+1662:         free(stackIdx);
+1663:     }
+1664:     else
+1665:     {
+1666:         /* First, generate vertex index arrays for drawing with glDrawElements
+1667:          * All stacks, including top and bottom are covered with a triangle
+1668:          * strip.
+1669:          */
+1670:         GLushort  *stripIdx;
+1671:         /* Create index vector */
+1672:         GLushort offset;
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_geometry.c" line="1721" id="memleak" subid="deallocDealloc" severity="Warning" msg="Deallocating a deallocated pointer: stripIdx" web_identify="{&quot;identify&quot;:&quot;stripIdx&quot;}" func_info="" content="1711:             stripIdx[idx+1] = offset+j;
+1712:         }
+1713:         stripIdx[idx  ] = nVert-1;                  /* repeat first slice&apos;s idx for closing off shape */
+1714:         stripIdx[idx+1] = offset;
+1715: 
+1716: 
+1717:         /* draw */
+1718:         fghDrawGeometrySolid(vertices,normals,NULL,nVert,stripIdx,stacks,(slices+1)*2);
+1719: 
+1720:         /* cleanup allocated memory */
+1721:         free(stripIdx);
+1722:     }
+1723:     
+1724:     /* cleanup allocated memory */
+1725:     free(vertices);
+1726:     free(normals);
+1727: }
+1728: 
+1729: static void fghCone( GLfloat base, GLfloat height, GLint slices, GLint stacks, GLboolean useWireMode )
+1730: {
+1731:     int i,j,idx, nVert;
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_geometry.c" line="1740" id="memleak" subid="memleak" severity="Warning" msg="Memory leak: normals" web_identify="{&quot;identify&quot;:&quot;normals&quot;}" func_info="" content="1730: {
+1731:     int i,j,idx, nVert;
+1732:     GLfloat *vertices, *normals;
+1733: 
+1734:     /* Generate vertices and normals */
+1735:     /* Note, (stacks+1)*slices vertices for side of object, slices+1 for top and bottom closures */
+1736:     fghGenerateCone(base,height,slices,stacks,&amp;vertices,&amp;normals,&amp;nVert);
+1737: 
+1738:     if (nVert==0)
+1739:         /* nothing to draw */
+1740:         return;
+1741: 
+1742:     if (useWireMode)
+1743:     {
+1744:         GLushort  *sliceIdx, *stackIdx;
+1745:         /* First, generate vertex index arrays for drawing with glDrawElements
+1746:          * We have a bunch of line_loops to draw for each stack, and a
+1747:          * bunch for each slice.
+1748:          */
+1749: 
+1750:         stackIdx = malloc(slices*stacks*sizeof(GLushort));
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_geometry.c" line="1740" id="memleak" subid="memleak" severity="Warning" msg="Memory leak: vertices" web_identify="{&quot;identify&quot;:&quot;vertices&quot;}" func_info="" content="1730: {
+1731:     int i,j,idx, nVert;
+1732:     GLfloat *vertices, *normals;
+1733: 
+1734:     /* Generate vertices and normals */
+1735:     /* Note, (stacks+1)*slices vertices for side of object, slices+1 for top and bottom closures */
+1736:     fghGenerateCone(base,height,slices,stacks,&amp;vertices,&amp;normals,&amp;nVert);
+1737: 
+1738:     if (nVert==0)
+1739:         /* nothing to draw */
+1740:         return;
+1741: 
+1742:     if (useWireMode)
+1743:     {
+1744:         GLushort  *sliceIdx, *stackIdx;
+1745:         /* First, generate vertex index arrays for drawing with glDrawElements
+1746:          * We have a bunch of line_loops to draw for each stack, and a
+1747:          * bunch for each slice.
+1748:          */
+1749: 
+1750:         stackIdx = malloc(slices*stacks*sizeof(GLushort));
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_geometry.c" line="1783" id="memleak" subid="deallocDealloc" severity="Warning" msg="Deallocating a deallocated pointer: sliceIdx" web_identify="{&quot;identify&quot;:&quot;sliceIdx&quot;}" func_info="" content="1773:             sliceIdx[idx++] = offset+slices;
+1774:             sliceIdx[idx++] = offset+(stacks+1)*slices;
+1775:         }
+1776: 
+1777:         /* draw */
+1778:         fghDrawGeometryWire(vertices,normals,nVert,
+1779:             sliceIdx,1,slices*2,GL_LINES,
+1780:             stackIdx,stacks,slices);
+1781: 
+1782:         /* cleanup allocated memory */
+1783:         free(sliceIdx);
+1784:         free(stackIdx);
+1785:     }
+1786:     else
+1787:     {
+1788:         /* First, generate vertex index arrays for drawing with glDrawElements
+1789:          * All stacks, including top and bottom are covered with a triangle
+1790:          * strip.
+1791:          */
+1792:         GLushort  *stripIdx;
+1793:         /* Create index vector */
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_geometry.c" line="1784" id="memleak" subid="deallocDealloc" severity="Warning" msg="Deallocating a deallocated pointer: stackIdx" web_identify="{&quot;identify&quot;:&quot;stackIdx&quot;}" func_info="" content="1774:             sliceIdx[idx++] = offset+(stacks+1)*slices;
+1775:         }
+1776: 
+1777:         /* draw */
+1778:         fghDrawGeometryWire(vertices,normals,nVert,
+1779:             sliceIdx,1,slices*2,GL_LINES,
+1780:             stackIdx,stacks,slices);
+1781: 
+1782:         /* cleanup allocated memory */
+1783:         free(sliceIdx);
+1784:         free(stackIdx);
+1785:     }
+1786:     else
+1787:     {
+1788:         /* First, generate vertex index arrays for drawing with glDrawElements
+1789:          * All stacks, including top and bottom are covered with a triangle
+1790:          * strip.
+1791:          */
+1792:         GLushort  *stripIdx;
+1793:         /* Create index vector */
+1794:         GLushort offset;
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_geometry.c" line="1832" id="memleak" subid="deallocDealloc" severity="Warning" msg="Deallocating a deallocated pointer: stripIdx" web_identify="{&quot;identify&quot;:&quot;stripIdx&quot;}" func_info="" content="1822:                 stripIdx[idx+1] = offset+j+slices;
+1823:             }
+1824:             stripIdx[idx  ] = offset;               /* repeat first slice&apos;s idx for closing off shape */
+1825:             stripIdx[idx+1] = offset+slices;
+1826:         }
+1827: 
+1828:         /* draw */
+1829:         fghDrawGeometrySolid(vertices,normals,NULL,nVert,stripIdx,stacks+1,(slices+1)*2);
+1830: 
+1831:         /* cleanup allocated memory */
+1832:         free(stripIdx);
+1833:     }
+1834: 
+1835:     /* cleanup allocated memory */
+1836:     free(vertices);
+1837:     free(normals);
+1838: }
+1839: 
+1840: static void fghCylinder( GLfloat radius, GLfloat height, GLint slices, GLint stacks, GLboolean useWireMode )
+1841: {
+1842:     int i,j,idx, nVert;
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_geometry.c" line="1851" id="memleak" subid="memleak" severity="Warning" msg="Memory leak: normals" web_identify="{&quot;identify&quot;:&quot;normals&quot;}" func_info="" content="1841: {
+1842:     int i,j,idx, nVert;
+1843:     GLfloat *vertices, *normals;
+1844: 
+1845:     /* Generate vertices and normals */
+1846:     /* Note, (stacks+1)*slices vertices for side of object, 2*slices+2 for top and bottom closures */
+1847:     fghGenerateCylinder(radius,height,slices,stacks,&amp;vertices,&amp;normals,&amp;nVert);
+1848: 
+1849:     if (nVert==0)
+1850:         /* nothing to draw */
+1851:         return;
+1852: 
+1853:     if (useWireMode)
+1854:     {
+1855:         GLushort  *sliceIdx, *stackIdx;
+1856:         /* First, generate vertex index arrays for drawing with glDrawElements
+1857:          * We have a bunch of line_loops to draw for each stack, and a
+1858:          * bunch for each slice.
+1859:          */
+1860: 
+1861:         stackIdx = malloc(slices*(stacks+1)*sizeof(GLushort));
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_geometry.c" line="1851" id="memleak" subid="memleak" severity="Warning" msg="Memory leak: vertices" web_identify="{&quot;identify&quot;:&quot;vertices&quot;}" func_info="" content="1841: {
+1842:     int i,j,idx, nVert;
+1843:     GLfloat *vertices, *normals;
+1844: 
+1845:     /* Generate vertices and normals */
+1846:     /* Note, (stacks+1)*slices vertices for side of object, 2*slices+2 for top and bottom closures */
+1847:     fghGenerateCylinder(radius,height,slices,stacks,&amp;vertices,&amp;normals,&amp;nVert);
+1848: 
+1849:     if (nVert==0)
+1850:         /* nothing to draw */
+1851:         return;
+1852: 
+1853:     if (useWireMode)
+1854:     {
+1855:         GLushort  *sliceIdx, *stackIdx;
+1856:         /* First, generate vertex index arrays for drawing with glDrawElements
+1857:          * We have a bunch of line_loops to draw for each stack, and a
+1858:          * bunch for each slice.
+1859:          */
+1860: 
+1861:         stackIdx = malloc(slices*(stacks+1)*sizeof(GLushort));
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_geometry.c" line="1894" id="memleak" subid="deallocDealloc" severity="Warning" msg="Deallocating a deallocated pointer: sliceIdx" web_identify="{&quot;identify&quot;:&quot;sliceIdx&quot;}" func_info="" content="1884:             sliceIdx[idx++] = offset+slices;
+1885:             sliceIdx[idx++] = offset+(stacks+1)*slices;
+1886:         }
+1887: 
+1888:         /* draw */
+1889:         fghDrawGeometryWire(vertices,normals,nVert,
+1890:             sliceIdx,1,slices*2,GL_LINES,
+1891:             stackIdx,stacks+1,slices);
+1892: 
+1893:         /* cleanup allocated memory */
+1894:         free(sliceIdx);
+1895:         free(stackIdx);
+1896:     }
+1897:     else
+1898:     {
+1899:         /* First, generate vertex index arrays for drawing with glDrawElements
+1900:          * All stacks, including top and bottom are covered with a triangle
+1901:          * strip.
+1902:          */
+1903:         GLushort  *stripIdx;
+1904:         /* Create index vector */
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_geometry.c" line="1895" id="memleak" subid="deallocDealloc" severity="Warning" msg="Deallocating a deallocated pointer: stackIdx" web_identify="{&quot;identify&quot;:&quot;stackIdx&quot;}" func_info="" content="1885:             sliceIdx[idx++] = offset+(stacks+1)*slices;
+1886:         }
+1887: 
+1888:         /* draw */
+1889:         fghDrawGeometryWire(vertices,normals,nVert,
+1890:             sliceIdx,1,slices*2,GL_LINES,
+1891:             stackIdx,stacks+1,slices);
+1892: 
+1893:         /* cleanup allocated memory */
+1894:         free(sliceIdx);
+1895:         free(stackIdx);
+1896:     }
+1897:     else
+1898:     {
+1899:         /* First, generate vertex index arrays for drawing with glDrawElements
+1900:          * All stacks, including top and bottom are covered with a triangle
+1901:          * strip.
+1902:          */
+1903:         GLushort  *stripIdx;
+1904:         /* Create index vector */
+1905:         GLushort offset;
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_geometry.c" line="1953" id="memleak" subid="deallocDealloc" severity="Warning" msg="Deallocating a deallocated pointer: stripIdx" web_identify="{&quot;identify&quot;:&quot;stripIdx&quot;}" func_info="" content="1943:             stripIdx[idx  ] = offset+j;
+1944:             stripIdx[idx+1] = nVert-1;              /* zero based index, last element in array (bottom vertex)... */
+1945:         }
+1946:         stripIdx[idx  ] = offset;
+1947:         stripIdx[idx+1] = nVert-1;                  /* repeat first slice&apos;s idx for closing off shape */
+1948: 
+1949:         /* draw */
+1950:         fghDrawGeometrySolid(vertices,normals,NULL,nVert,stripIdx,stacks+2,(slices+1)*2);
+1951: 
+1952:         /* cleanup allocated memory */
+1953:         free(stripIdx);
+1954:     }
+1955: 
+1956:     /* cleanup allocated memory */
+1957:     free(vertices);
+1958:     free(normals);
+1959: }
+1960: 
+1961: static void fghTorus( GLfloat dInnerRadius, GLfloat dOuterRadius, GLint nSides, GLint nRings, GLboolean useWireMode )
+1962: {
+1963:     int i,j,idx, nVert;
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_geometry.c" line="1971" id="memleak" subid="memleak" severity="Warning" msg="Memory leak: normals" web_identify="{&quot;identify&quot;:&quot;normals&quot;}" func_info="" content="1961: static void fghTorus( GLfloat dInnerRadius, GLfloat dOuterRadius, GLint nSides, GLint nRings, GLboolean useWireMode )
+1962: {
+1963:     int i,j,idx, nVert;
+1964:     GLfloat *vertices, *normals;
+1965: 
+1966:     /* Generate vertices and normals */
+1967:     fghGenerateTorus(dInnerRadius,dOuterRadius,nSides,nRings, &amp;vertices,&amp;normals,&amp;nVert);
+1968: 
+1969:     if (nVert==0)
+1970:         /* nothing to draw */
+1971:         return;
+1972: 
+1973:     if (useWireMode)
+1974:     {
+1975:         GLushort  *sideIdx, *ringIdx;
+1976:         /* First, generate vertex index arrays for drawing with glDrawElements
+1977:          * We have a bunch of line_loops to draw each side, and a
+1978:          * bunch for each ring.
+1979:          */
+1980: 
+1981:         ringIdx = malloc(nRings*nSides*sizeof(GLushort));
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_geometry.c" line="1971" id="memleak" subid="memleak" severity="Warning" msg="Memory leak: vertices" web_identify="{&quot;identify&quot;:&quot;vertices&quot;}" func_info="" content="1961: static void fghTorus( GLfloat dInnerRadius, GLfloat dOuterRadius, GLint nSides, GLint nRings, GLboolean useWireMode )
+1962: {
+1963:     int i,j,idx, nVert;
+1964:     GLfloat *vertices, *normals;
+1965: 
+1966:     /* Generate vertices and normals */
+1967:     fghGenerateTorus(dInnerRadius,dOuterRadius,nSides,nRings, &amp;vertices,&amp;normals,&amp;nVert);
+1968: 
+1969:     if (nVert==0)
+1970:         /* nothing to draw */
+1971:         return;
+1972: 
+1973:     if (useWireMode)
+1974:     {
+1975:         GLushort  *sideIdx, *ringIdx;
+1976:         /* First, generate vertex index arrays for drawing with glDrawElements
+1977:          * We have a bunch of line_loops to draw each side, and a
+1978:          * bunch for each ring.
+1979:          */
+1980: 
+1981:         ringIdx = malloc(nRings*nSides*sizeof(GLushort));
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_geometry.c" line="2006" id="memleak" subid="deallocDealloc" severity="Warning" msg="Deallocating a deallocated pointer: sideIdx" web_identify="{&quot;identify&quot;:&quot;sideIdx&quot;}" func_info="" content="1996:         for( i=0,idx=0; i&lt;nSides; i++ )
+1997:             for( j=0; j&lt;nRings; j++, idx++ )
+1998:                 sideIdx[idx] = j * nSides + i;
+1999: 
+2000:         /* draw */
+2001:         fghDrawGeometryWire(vertices,normals,nVert,
+2002:             ringIdx,nRings,nSides,GL_LINE_LOOP,
+2003:             sideIdx,nSides,nRings);
+2004:         
+2005:         /* cleanup allocated memory */
+2006:         free(sideIdx);
+2007:         free(ringIdx);
+2008:     }
+2009:     else
+2010:     {
+2011:         /* First, generate vertex index arrays for drawing with glDrawElements
+2012:          * All stacks, including top and bottom are covered with a triangle
+2013:          * strip.
+2014:          */
+2015:         GLushort  *stripIdx;
+2016: 
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_geometry.c" line="2007" id="memleak" subid="deallocDealloc" severity="Warning" msg="Deallocating a deallocated pointer: ringIdx" web_identify="{&quot;identify&quot;:&quot;ringIdx&quot;}" func_info="" content="1997:             for( j=0; j&lt;nRings; j++, idx++ )
+1998:                 sideIdx[idx] = j * nSides + i;
+1999: 
+2000:         /* draw */
+2001:         fghDrawGeometryWire(vertices,normals,nVert,
+2002:             ringIdx,nRings,nSides,GL_LINE_LOOP,
+2003:             sideIdx,nSides,nRings);
+2004:         
+2005:         /* cleanup allocated memory */
+2006:         free(sideIdx);
+2007:         free(ringIdx);
+2008:     }
+2009:     else
+2010:     {
+2011:         /* First, generate vertex index arrays for drawing with glDrawElements
+2012:          * All stacks, including top and bottom are covered with a triangle
+2013:          * strip.
+2014:          */
+2015:         GLushort  *stripIdx;
+2016: 
+2017:         /* Allocate buffers for indices, bail out if memory allocation fails */
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_geometry.c" line="2047" id="memleak" subid="deallocDealloc" severity="Warning" msg="Deallocating a deallocated pointer: stripIdx" web_identify="{&quot;identify&quot;:&quot;stripIdx&quot;}" func_info="" content="2037:             /* repeat first to close off shape */
+2038:             stripIdx[idx  ] = i;
+2039:             stripIdx[idx+1] = i + ioff;
+2040:             idx +=2;
+2041:         }
+2042: 
+2043:         /* draw */
+2044:         fghDrawGeometrySolid(vertices,normals,NULL,nVert,stripIdx,nSides,(nRings+1)*2);
+2045: 
+2046:         /* cleanup allocated memory */
+2047:         free(stripIdx);
+2048:     }
+2049: 
+2050:     /* cleanup allocated memory */
+2051:     free(vertices);
+2052:     free(normals);
+2053: }
+2054: 
+2055: 
+2056: /* -- INTERFACE FUNCTIONS ---------------------------------------------- */
+2057: 
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_menu.c" line="196" id="nullpointer" subid="dereferenceAfterCheck" severity="Serious" msg="Comparing [menuEntry] to null at line 194 implies that [menuEntry ] might be null.Dereferencing null pointer [menuEntry]." web_identify="{&quot;identify&quot;:&quot;menuEntry&quot;}" func_info="static GLboolean fghCheckMenuStatus ( struct tagSFG_Menu * menu )" content="186:         ( y &gt;= FREEGLUT_MENU_BORDER ) &amp;&amp;
+187:         ( y &lt; menu-&gt;Height - FREEGLUT_MENU_BORDER )  )
+188:     {
+189:         int menuID = ( y - FREEGLUT_MENU_BORDER ) / FREEGLUT_MENUENTRY_HEIGHT(menu-&gt;Font);
+190: 
+191:         /* The mouse cursor is somewhere over our box, check it out. */
+192:         menuEntry = fghFindMenuEntry( menu, menuID + 1 );
+193:         FREEGLUT_INTERNAL_ERROR_EXIT( menuEntry, &quot;Cannot find menu entry&quot;,
+194:                                       &quot;fghCheckMenuStatus&quot; );
+195: 
+196:         menuEntry-&gt;IsActive = GL_TRUE;
+197:         menuEntry-&gt;Ordinal = menuID;
+198: 
+199:         /*
+200:          * If this is not the same as the last active menu entry, deactivate
+201:          * the previous entry.  Specifically, if the previous active entry
+202:          * was a submenu then deactivate it.
+203:          */
+204:         if( menu-&gt;ActiveEntry &amp;&amp; ( menuEntry != menu-&gt;ActiveEntry ) )
+205:             if( menu-&gt;ActiveEntry-&gt;SubMenu )
+206:                 fghDeactivateSubMenu( menu-&gt;ActiveEntry );
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_structure.c" line="201" id="nullpointer" subid="dereferenceAfterCheck" severity="Serious" msg="Comparing [window] to null at line 199 implies that [window ] might be null.Dereferencing null pointer [window]." web_identify="{&quot;identify&quot;:&quot;window&quot;}" func_info="void fgDestroyWindow ( struct tagSFG_Window * window )" content="191: /*
+192:  * This function destroys a window and all of its subwindows. Actually,
+193:  * another function, defined in fg_window.c is called, but this is
+194:  * a whole different story...
+195:  */
+196: void fgDestroyWindow( SFG_Window* window )
+197: {
+198:     FREEGLUT_INTERNAL_ERROR_EXIT ( window, &quot;Window destroy function called with null window&quot;,
+199:                                    &quot;fgDestroyWindow&quot; );
+200: 
+201:     while( window-&gt;Children.First )
+202:         fgDestroyWindow( ( SFG_Window * )window-&gt;Children.First );
+203: 
+204:     {
+205:         SFG_Window *activeWindow = fgStructure.CurrentWindow;
+206:         INVOKE_WCB( *window, Destroy, ( ) );
+207:         fgSetWindow( activeWindow );
+208:     }
+209: 
+210:     if( window-&gt;Parent )
+211:         fgListRemove( &amp;window-&gt;Parent-&gt;Children, &amp;window-&gt;Node );
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_structure.c" line="296" id="nullpointer" subid="dereferenceAfterCheck" severity="Serious" msg="Comparing [menu] to null at line 278 implies that [menu ] might be null.Dereferencing null pointer [menu]." web_identify="{&quot;identify&quot;:&quot;menu&quot;}" func_info="void fgDestroyMenu ( struct tagSFG_Menu * menu )" content="286:     /* Now proceed with removing menu entries that lead to this menu */
+287:     for( from = ( SFG_Menu * )fgStructure.Menus.First;
+288:          from;
+289:          from = ( SFG_Menu * )from-&gt;Node.Next )
+290:         fghRemoveMenuFromMenu( from, menu );
+291: 
+292:     /*
+293:      * If the programmer defined a destroy callback, call it
+294:      * A. Donev: But first make this the active menu
+295:      */
+296:     if( menu-&gt;Destroy )
+297:     {
+298:         SFG_Menu *activeMenu=fgStructure.CurrentMenu;
+299:         fgStructure.CurrentMenu = menu;
+300:         menu-&gt;Destroy( );
+301:         fgStructure.CurrentMenu = activeMenu;
+302:     }
+303: 
+304:     /*
+305:      * Now we are pretty sure the menu is not used anywhere
+306:      * and that we can remove all of its entries
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_structure.c" line="392" id="nullpointer" subid="dereferenceAfterCheck" severity="Serious" msg="Comparing [enumerator] to null at line 384 implies that [enumerator ] might be null.Dereferencing null pointer [enumerator]." web_identify="{&quot;identify&quot;:&quot;enumerator&quot;}" func_info="void fgEnumWindows ( FGCBWindowEnumerator enumCallback , struct tagSFG_Enumerator * enumerator )" content="382:     FREEGLUT_INTERNAL_ERROR_EXIT ( enumCallback &amp;&amp; enumerator,
+383:                                    &quot;Enumerator or callback missing from window enumerator call&quot;,
+384:                                    &quot;fgEnumWindows&quot; );
+385: 
+386:     /* Check every of the top-level windows */
+387:     for( window = ( SFG_Window * )fgStructure.Windows.First;
+388:          window;
+389:          window = ( SFG_Window * )window-&gt;Node.Next )
+390:     {
+391:         enumCallback( window, enumerator );
+392:         if( enumerator-&gt;found )
+393:             return;
+394:     }
+395: }
+396: 
+397: /*
+398: * Helper function to enumerate through all registered top-level windows
+399: */
+400: void fgEnumMenus( FGCBMenuEnumerator enumCallback, SFG_Enumerator* enumerator )
+401: {
+402:     SFG_Menu *menu;
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_structure.c" line="414" id="nullpointer" subid="dereferenceAfterCheck" severity="Serious" msg="Comparing [enumerator] to null at line 406 implies that [enumerator ] might be null.Dereferencing null pointer [enumerator]." web_identify="{&quot;identify&quot;:&quot;enumerator&quot;}" func_info="void fgEnumMenus ( FGCBMenuEnumerator enumCallback , struct tagSFG_Enumerator * enumerator )" content="404:     FREEGLUT_INTERNAL_ERROR_EXIT ( enumCallback &amp;&amp; enumerator,
+405:         &quot;Enumerator or callback missing from window enumerator call&quot;,
+406:         &quot;fgEnumWindows&quot; );
+407: 
+408:     /* It&apos;s enough to check all entries in fgStructure.Menus... */
+409:     for( menu = (SFG_Menu *)fgStructure.Menus.First;
+410:         menu;
+411:         menu = (SFG_Menu *)menu-&gt;Node.Next )
+412:     {
+413:         enumCallback( menu, enumerator );
+414:         if( enumerator-&gt;found )
+415:             return;
+416:     }
+417: }
+418: 
+419: /*
+420:  * Helper function to enumerate through all a window&apos;s subwindows
+421:  * (single level descent)
+422:  */
+423: void fgEnumSubWindows( SFG_Window* window, FGCBWindowEnumerator enumCallback,
+424:                        SFG_Enumerator* enumerator )
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_structure.c" line="438" id="nullpointer" subid="dereferenceAfterCheck" severity="Serious" msg="Comparing [enumerator] to null at line 430 implies that [enumerator ] might be null.Dereferencing null pointer [enumerator]." web_identify="{&quot;identify&quot;:&quot;enumerator&quot;}" func_info="void fgEnumSubWindows ( struct tagSFG_Window * window , FGCBWindowEnumerator enumCallback , struct tagSFG_Enumerator * enumerator )" content="428:     FREEGLUT_INTERNAL_ERROR_EXIT ( enumCallback &amp;&amp; enumerator,
+429:                                    &quot;Enumerator or callback missing from subwindow enumerator call&quot;,
+430:                                    &quot;fgEnumSubWindows&quot; );
+431:     FREEGLUT_INTERNAL_ERROR_EXIT_IF_NOT_INITIALISED ( &quot;Window Enumeration&quot; );
+432: 
+433:     for( child = ( SFG_Window * )window-&gt;Children.First;
+434:          child;
+435:          child = ( SFG_Window * )child-&gt;Node.Next )
+436:     {
+437:         enumCallback( child, enumerator );
+438:         if( enumerator-&gt;found )
+439:             return;
+440:     }
+441: }
+442: 
+443: /*
+444:  * A static helper function to look for a window given its handle
+445:  */
+446: static void fghcbWindowByHandle( SFG_Window *window,
+447:                                  SFG_Enumerator *enumerator )
+448: {
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/mswin/fg_main_mswin.c" line="1387" id="nullpointer" subid="dereferenceBeforeCheck" severity="Serious" msg="Null - checking [lParam] suggests that it may be null, but it has already been dereferenced at line 798." web_identify="{&quot;identify&quot;:&quot;lParam&quot;}" func_info="long fgPlatformWindowProc ( void * hWnd , int uMsg , long wParam , long lParam )" content="1377:         fgState.Modifiers = fgPlatformGetModifiers( );
+1378:         INVOKE_WCB( *window, Keyboard,
+1379:                     ( (char)wParam,
+1380:                       window-&gt;State.MouseX, window-&gt;State.MouseY )
+1381:         );
+1382:         fgState.Modifiers = INVALID_MODIFIERS;
+1383:     }
+1384:     break;
+1385: 
+1386:     case WM_CAPTURECHANGED:
+1387:         if (!lParam || !fgWindowByHandle((HWND)lParam))
+1388:             /* Capture released or capture taken by non-FreeGLUT window */
+1389:             setCaptureActive = 0;
+1390:         /* Docs advise a redraw */
+1391:         InvalidateRect( hWnd, NULL, GL_FALSE );
+1392:         UpdateWindow(hWnd);
+1393:         lRet = 0;   /* Per docs, should return zero */
+1394:         break;
+1395: 
+1396: #if !defined(_WIN32_WCE)
+1397:     case WM_SYNCPAINT:  /* 0x0088 */
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/mswin/fg_main_mswin.c" line="802" id="nullpointer" subid="dereferenceAfterCheck" severity="Serious" msg="Comparing [window] to null at line 800 implies that [window ] might be null.Dereferencing null pointer [window]." web_identify="{&quot;identify&quot;:&quot;window&quot;}" func_info="long fgPlatformWindowProc ( void * hWnd , int uMsg , long wParam , long lParam )" content="792:              WMMsg2Str(uMsg), uMsg, wParam, lParam ); */
+793: 
+794:     switch( uMsg )
+795:     {
+796:     case WM_CREATE:
+797:         /* The window structure is passed as the creation structure parameter... */
+798:         window = (SFG_Window *) (((LPCREATESTRUCT) lParam)-&gt;lpCreateParams);
+799:         FREEGLUT_INTERNAL_ERROR_EXIT ( ( window != NULL ), &quot;Cannot create window&quot;,
+800:                                        &quot;fgPlatformWindowProc&quot; );
+801: 
+802:         window-&gt;Window.Handle = hWnd;
+803:         window-&gt;Window.pContext.Device = GetDC( hWnd );
+804:         if( window-&gt;IsMenu )
+805:         {
+806:             unsigned int current_DisplayMode = fgState.DisplayMode;
+807:             fgState.DisplayMode = GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH;
+808: #if !defined(_WIN32_WCE)
+809:             fgSetupPixelFormat( window, GL_FALSE, PFD_MAIN_PLANE );
+810: #endif
+811:             fgState.DisplayMode = current_DisplayMode;
+812: 
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/mswin/fg_state_mswin.c" line="180" id="nullpointer" subid="dereferenceBeforeCheck" severity="Serious" msg="Null - checking [fgStructure.CurrentWindow] suggests that it may be null, but it has already been dereferenced at line 146." web_identify="{&quot;identify&quot;:&quot;fgStructure.CurrentWindow&quot;}" func_info="int fgPlatformGlutGet ( GLenum eWhat )" content="170:          *    is happening here for Windows--&quot;freeglut&quot; will return
+171:          *    the size of the drawable area--the (w,h) that you
+172:          *    specified when you created the window--and the coordinates
+173:          *    of the upper left hand corner of the drawable area, i.e.
+174:          *    of the client rect--which is NOT the (x,y) you specified.
+175:          */
+176: 
+177:         RECT winRect;
+178:         POINT topLeft = {0,0};
+179: 
+180:         freeglut_return_val_if_fail( fgStructure.CurrentWindow != NULL, 0 );
+181: 
+182: #if defined(_WIN32_WCE)
+183:         GetWindowRect( fgStructure.CurrentWindow-&gt;Window.Handle, &amp;winRect);
+184: #else
+185:         ClientToScreen(fgStructure.CurrentWindow-&gt;Window.Handle, &amp;topLeft);
+186:         
+187:         if (fgStructure.CurrentWindow-&gt;Parent)
+188:             /* For child window, we should return relative to upper-left
+189:              * of parent&apos;s client area.
+190:              */
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/x11/fg_joystick_x11.c" line="272" id="memleak" subid="resourceLeak" severity="Warning" msg="Resource leak: joyfile" web_identify="{&quot;identify&quot;:&quot;joyfile&quot;}" func_info="" content="262:         fghJoystickRawRead( joy, buttons, axes );
+263:         joy-&gt;error = axes[ 0 ] &lt; -1000000000.0f;
+264:         if( joy-&gt;error )
+265:             return;
+266: 
+267:         snprintf( joyfname, sizeof(joyfname), &quot;%s/.joy%drc&quot;, getenv( &quot;HOME&quot; ), joy-&gt;id );
+268: 
+269:         joyfile = fopen( joyfname, &quot;r&quot; );
+270:         joy-&gt;error =( joyfile == NULL );
+271:         if( joy-&gt;error )
+272:             return;
+273: 
+274:         noargs = fscanf( joyfile, &quot;%d%f%f%f%f%f%f&quot;, &amp;in_no_axes,
+275:                          &amp;joy-&gt;min[ 0 ], &amp;joy-&gt;center[ 0 ], &amp;joy-&gt;max[ 0 ],
+276:                          &amp;joy-&gt;min[ 1 ], &amp;joy-&gt;center[ 1 ], &amp;joy-&gt;max[ 1 ] );
+277:         joy-&gt;error = noargs != 7 || in_no_axes != _JS_MAX_AXES;
+278:         fclose( joyfile );
+279:         if( joy-&gt;error )
+280:             return;
+281: 
+282:         for( i = 0; i &lt; _JS_MAX_AXES; i++ )
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/x11/fg_window_x11.c" line="237" id="nullpointer" subid="dereferenceAfterCheck" severity="Serious" msg="Comparing [visualInfo] to null at line 214 implies that [visualInfo ] might be null.Dereferencing null pointer [visualInfo]." web_identify="{&quot;identify&quot;:&quot;visualInfo&quot;}" func_info="void fgPlatformOpenWindow ( struct tagSFG_Window * window , const char * title , GLboolean positionUse , int x , int y , GLboolean sizeUse , int w , int h , GLboolean gameMode , GLboolean isSubWindow )" content="227:         StructureNotifyMask | SubstructureNotifyMask | ExposureMask |
+228:         ButtonPressMask | ButtonReleaseMask | KeyPressMask | KeyReleaseMask |
+229:         VisibilityChangeMask | EnterWindowMask | LeaveWindowMask |
+230:         PointerMotionMask | ButtonMotionMask;
+231:     winAttr.background_pixmap = None;
+232:     winAttr.background_pixel  = 0;
+233:     winAttr.border_pixel      = 0;
+234: 
+235:     winAttr.colormap = XCreateColormap(
+236:         fgDisplay.pDisplay.Display, fgDisplay.pDisplay.RootWindow,
+237:         visualInfo-&gt;visual, AllocNone
+238:     );
+239: 
+240:     mask = CWBackPixmap | CWBorderPixel | CWColormap | CWEventMask;
+241: 
+242:     if( window-&gt;IsMenu || ( gameMode == GL_TRUE ) )
+243:     {
+244:         winAttr.override_redirect = True;
+245:         mask |= CWOverrideRedirect;
+246:     }
+247: 
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/common.hpp" line="151" id="uninit" subid="uninitMemberVar" severity="Warning" msg="Member variable &apos;CallbackWrapper::_exit,&apos; is not initialized in the constructor." web_identify="{&quot;identify&quot;:&quot;CallbackWrapper::_exit,&quot;}" func_info="CallbackWrapper" content="141: 
+142:     fclose(fp);
+143: }
+144: 
+145: 
+146: class CallbackWrapper
+147: {
+148: public:
+149:     typedef void(*TY_FRAME_CALLBACK) (TY_FRAME_DATA*, void* userdata);
+150: 
+151:     CallbackWrapper(){
+152:         _hDevice = NULL;
+153:         _cb = NULL;
+154:         _userdata = NULL;
+155:     }
+156: 
+157:     TY_STATUS TYRegisterCallback(TY_DEV_HANDLE hDevice, TY_FRAME_CALLBACK v, void* userdata)
+158:     {
+159:         _hDevice = hDevice;
+160:         _cb = v;
+161:         _userdata = userdata;
+"/>
+    <error file="/home/guo/iCrane0512/iCrane/src/adapter/simulation/Recorder.cpp" line="611" id="nullpointer" subid="dereferenceBeforeCheck" severity="Serious" msg="Null - checking [mpCurCloud] suggests that it may be null, but it has already been dereferenced at line 609." web_identify="{&quot;identify&quot;:&quot;mpCurCloud&quot;}" func_info="void LiDARRecorder::savePointCloud ( )" content="601:     mLiDAROutputDir = dir + layer + &quot;LiDAR_Q&quot; + &quot;_&quot; + std::to_string(mDevIndex) + &quot;/&quot;;
+602:     mpDM-&gt;makeDir(mLiDAROutputDir);
+603:     mLiDAROutputNameFile = dir + layer +&quot;LiDAR_Q&quot; + &quot;_&quot; + std::to_string(mDevIndex) + &quot;.txt&quot;;
+604: }
+605: 
+606: void LiDARRecorder::savePointCloud()
+607: {
+608:     std::string file = mLiDAROutputDir + std::to_string(mpCurCloud-&gt;header.seq) + &quot;_&quot; +
+609:         std::to_string(mpCurCloud-&gt;header.stamp) + &quot;.pcd&quot;;
+610: 
+611:     if (mpCurCloud != nullptr)
+612:     {
+613:         if (mpCurCloud-&gt;points.size() != 0 &amp;&amp; mOfstream.is_open())
+614:         {
+615:             mPCDWriter.write&lt;quanergy::PointXYZIR&gt;(file.c_str(), *mpCurCloud, true);
+616: 
+617:             mOfstream &lt;&lt; std::to_string(mpCurCloud-&gt;header.seq) + &quot;_&quot; +
+618:                 std::to_string(mpCurCloud-&gt;header.stamp) + &quot;.pcd&quot; &lt;&lt; std::endl;
+619:         }
+620:     }
+621: }
+"/>
+
+</results>
