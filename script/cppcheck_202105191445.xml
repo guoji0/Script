@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results version="2">
+    <cppcheck version="2.4.1"/>
+    <errors>
+        <error id="nullPointerArithmetic" severity="error" msg="Pointer addition with NULL pointer." verbose="Pointer addition with NULL pointer." cwe="682">
+            <location file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/progs/demos/smooth_opengl3/smooth_opengl3.c" line="362" column="45" info="Null pointer addition"/>
+        </error>
+        <error id="memleakOnRealloc" severity="error" msg="Common realloc mistake: &apos;array&apos; nulled but not freed upon failure" verbose="Common realloc mistake: &apos;array&apos; nulled but not freed upon failure" cwe="401">
+            <location file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/egl/fg_state_egl.c" line="162" column="2"/>
+            <symbol>array</symbol>
+        </error>
+        <error id="objectIndex" severity="warning" msg="The address of local variable &apos;sint1&apos; might be accessed at non-zero index." verbose="The address of local variable &apos;sint1&apos; might be accessed at non-zero index." cwe="758">
+            <location file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_geometry.c" line="1132" column="16"/>
+            <location file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_geometry.c" line="1175" column="20" info="Calling function &apos;fghCircleTable&apos;, 1st argument &apos;&amp;sint1&apos; value is lifetime=sint1"/>
+            <location file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_geometry.c" line="1175" column="20" info="Address of variable taken here."/>
+        </error>
+        <error id="objectIndex" severity="warning" msg="The address of local variable &apos;sint&apos; might be accessed at non-zero index." verbose="The address of local variable &apos;sint&apos; might be accessed at non-zero index." cwe="758">
+            <location file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_geometry.c" line="1132" column="16"/>
+            <location file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_geometry.c" line="1270" column="20" info="Calling function &apos;fghCircleTable&apos;, 1st argument &apos;&amp;sint&apos; value is lifetime=sint"/>
+            <location file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_geometry.c" line="1270" column="20" info="Address of variable taken here."/>
+        </error>
+        <error id="objectIndex" severity="warning" msg="The address of local variable &apos;sint&apos; might be accessed at non-zero index." verbose="The address of local variable &apos;sint&apos; might be accessed at non-zero index." cwe="758">
+            <location file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_geometry.c" line="1132" column="16"/>
+            <location file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_geometry.c" line="1355" column="20" info="Calling function &apos;fghCircleTable&apos;, 1st argument &apos;&amp;sint&apos; value is lifetime=sint"/>
+            <location file="/home/guo/iCrane0512/iCrane/src/adapter/camera/tycam/common/cloud_viewer/freeglut/src/fg_geometry.c" line="1355" column="20" info="Address of variable taken here."/>
+        </error>
+    </errors>
+</results>
+
+

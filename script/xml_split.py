@@ -1,6 +1,5 @@
 from xml.dom import minidom as minidom
 from xml.dom import  Node
-import os
 import pandas as pd
 import datetime
 #import numpy as np
@@ -48,7 +47,7 @@ if errors :
     #print(total_list)
     #print(total_list[2])
     df = pd.DataFrame(total_list, columns=csv_header)
-    df.to_excel(datetime.datetime.now().strftime("%Y%m%d%H%M")+'.xlsx', index=None)
+    df.to_excel('Tscancode_'+datetime.datetime.now().strftime("%Y%m%d%H%M")+'.xlsx', index=None)
     print('文件处理完成！')
 else:
     print('文件为空，请核实！')
