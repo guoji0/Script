@@ -1,0 +1,293 @@
+From a692775557640408f7043a391c6ff0039b302259 Mon Sep 17 00:00:00 2001
+From: guoji1314 <83851809+guoji1314@users.noreply.github.com>
+Date: Thu, 24 Jun 2021 16:27:40 +0800
+Subject: [PATCH 2/5] Add files via upload
+
+---
+ Script/0514test.py         |  3 +++
+ Script/cppcheck_xml.py     | 59 ++++++++++++++++++++++++++++++++++++++++++++++
+ Script/first.py            |  4 ++++
+ Script/jointest.py         |  3 +++
+ Script/np.py               |  3 +++
+ Script/pd.py               |  7 ++++++
+ Script/progress_bar.py     | 12 ++++++++++
+ Script/progress_bar2.py    |  6 +++++
+ Script/rate_calculation.py | 15 ++++++++++++
+ Script/txtsplit.py         | 19 +++++++++++++++
+ Script/xml_split.py        | 57 ++++++++++++++++++++++++++++++++++++++++++++
+ 11 files changed, 188 insertions(+)
+ create mode 100644 Script/0514test.py
+ create mode 100644 Script/cppcheck_xml.py
+ create mode 100644 Script/first.py
+ create mode 100644 Script/jointest.py
+ create mode 100644 Script/np.py
+ create mode 100644 Script/pd.py
+ create mode 100644 Script/progress_bar.py
+ create mode 100644 Script/progress_bar2.py
+ create mode 100644 Script/rate_calculation.py
+ create mode 100644 Script/txtsplit.py
+ create mode 100644 Script/xml_split.py
+
+diff --git a/Script/0514test.py b/Script/0514test.py
+new file mode 100644
+index 0000000..416000d
+--- /dev/null
++++ b/Script/0514test.py
+@@ -0,0 +1,3 @@
++print(1+1)
++import sys
++print(sys.argv[0])
+\ No newline at end of file
+diff --git a/Script/cppcheck_xml.py b/Script/cppcheck_xml.py
+new file mode 100644
+index 0000000..9d6b6cb
+--- /dev/null
++++ b/Script/cppcheck_xml.py
+@@ -0,0 +1,59 @@
++from xml.dom import minidom as minidom
++from xml.dom import  Node
++import os
++import pandas as pd
++import datetime
++
++
++print('请输入要处理的文件路径：')
++file_name = input()
++csv_header = ['file','line','column','severity','id','msg','verbose','cwe','info']
++
++doc=minidom.parse(file_name) #先把xml文件加载进来
++print("xmldom.parse:", type(doc))
++                   
++root=doc.documentElement#解析根元素
++print ("domobj.documentElement:", type(root))
++print(root.nodeName,',',root.nodeValue,',',root.nodeType) #获取元素的根节点
++errors=root.getElementsByTagName('error')
++total_list = []
++if errors :
++    for error in errors:
++        alist = []
++        locations=error.getElementsByTagName('location')
++        print('报错等级：%s'% error.getAttribute('severity'))
++        print('错误类型：%s'% error.getAttribute('id'))
++        print('报错短信息：%s'% error.getAttribute('msg'))
++        print('报错长信息：%s'% error.getAttribute('verbose'))
++        print('报错id：%s'% error.getAttribute('cwe'))
++        
++        line_list=[]
++        column_list=[]
++        info_list=[]
++        for location in locations:
++            line_list.append(location.getAttribute('line'))
++            column_list.append(location.getAttribute('column'))
++            info_list.append(location.getAttribute('info'))        
++        print('出错文件行：%s'% location.getAttribute('file'))
++        print('出错文件行：%s'% '||'.join(line_list))
++        print('出错文件列：%s'% '||'.join(column_list))
++        print('错误信息：%s'% '||'.join(info_list))
++        alist.append(location.getAttribute('file'))
++        alist.append('||'.join(line_list))
++        alist.append('||'.join(column_list))
++        alist.append(error.getAttribute('severity'))
++        alist.append(error.getAttribute('id'))
++        alist.append(error.getAttribute('msg'))
++        alist.append(error.getAttribute('verbose'))
++        alist.append(error.getAttribute('cwe'))
++        alist.append('||'.join(info_list))        
++        total_list.append(alist)
++    df = pd.DataFrame(total_list, columns=csv_header)
++    df.to_excel('cppcheck_'+datetime.datetime.now().strftime("%Y%m%d%H%M")+'.xlsx', index=None)
++    print('文件处理完成！')
++else:
++    print('文件为空，请核实！')
++
++
++
++
+diff --git a/Script/first.py b/Script/first.py
+new file mode 100644
+index 0000000..8bb037c
+--- /dev/null
++++ b/Script/first.py
+@@ -0,0 +1,4 @@
++
++print(1+1)
++
++
+diff --git a/Script/jointest.py b/Script/jointest.py
+new file mode 100644
+index 0000000..1ffc3d9
+--- /dev/null
++++ b/Script/jointest.py
+@@ -0,0 +1,3 @@
++alist = ['a','b','c']
++blist = '&&'.join(alist)
++print(blist)
+diff --git a/Script/np.py b/Script/np.py
+new file mode 100644
+index 0000000..8b1063c
+--- /dev/null
++++ b/Script/np.py
+@@ -0,0 +1,3 @@
++import numpy as np
++a = np.array([1,2,3])
++print (a)
+\ No newline at end of file
+diff --git a/Script/pd.py b/Script/pd.py
+new file mode 100644
+index 0000000..ecc19ea
+--- /dev/null
++++ b/Script/pd.py
+@@ -0,0 +1,7 @@
++import pandas as pd 
++
++
++data = pd.read_excel('test.xlsx')
++
++for index,row in data.iterrows():
++    print(row['file'])
+\ No newline at end of file
+diff --git a/Script/progress_bar.py b/Script/progress_bar.py
+new file mode 100644
+index 0000000..bd3b58f
+--- /dev/null
++++ b/Script/progress_bar.py
+@@ -0,0 +1,12 @@
++
++from time import sleep
++from tqdm import tqdm
++
++#for i in tqdm(range(20)):
++    #sleep(1)
++ 
++#print("\033[0;30m")
++#print("\033[1;30m")
++#print("\033[0;34m")
++#print("\033[1;34m")
++#print("\033[0;32m")
+\ No newline at end of file
+diff --git a/Script/progress_bar2.py b/Script/progress_bar2.py
+new file mode 100644
+index 0000000..4abbe14
+--- /dev/null
++++ b/Script/progress_bar2.py
+@@ -0,0 +1,6 @@
++import time
++from progressbar import *
++ 
++progress =ProgressBar()
++for i in progress(range(1000)):
++    time.sleep(0.01)
+\ No newline at end of file
+diff --git a/Script/rate_calculation.py b/Script/rate_calculation.py
+new file mode 100644
+index 0000000..8a19373
+--- /dev/null
++++ b/Script/rate_calculation.py
+@@ -0,0 +1,15 @@
++import calendar
++import time
++print(time.localtime(time.time()).tm_year)
++print('请输入金额：')
++rate = 0.000795
++Amount =int(input())
++total = 7500
++month_list= [6,7,8,9,10,11,12]
++for month in month_list:
++    total += calendar.monthrange(time.localtime(time.time()).tm_year,month)[-1]*float(rate)*Amount
++    if month == 6 or month == 7:
++        Amount = Amount
++    else:
++        Amount -= 1250
++print(total)
+diff --git a/Script/txtsplit.py b/Script/txtsplit.py
+new file mode 100644
+index 0000000..715e395
+--- /dev/null
++++ b/Script/txtsplit.py
+@@ -0,0 +1,19 @@
++import re
++with open ('/home/guo/script2/cppcheck_202105181409.txt','r') as file:
++    if file:
++        f = file.read()
++        lineList = f.split( '^')
++        total_list = []
++        for line in lineList:
++            if lineList.index(line) != len(lineList)-1:
++                print(lineList.index(line))
++                print(line)
++                line_list = []
++                line_list.append(line.split(':')[0])
++                line_list.append(line.split(':')[1])
++                line_list.append(line.split(':')[2])
++                line_list.append(line.split(':')[3])
++                #print(re.search(r':*.?',line).group())
++            #alist = re.split('[:.]',line)
++            #total_list.append(line)
++        #print(total_list[0])
+\ No newline at end of file
+diff --git a/Script/xml_split.py b/Script/xml_split.py
+new file mode 100644
+index 0000000..ee57a5b
+--- /dev/null
++++ b/Script/xml_split.py
+@@ -0,0 +1,57 @@
++from xml.dom import minidom as minidom
++from xml.dom import  Node
++import pandas as pd
++import datetime
++#import numpy as np
++'''text = 'Extra Header Start\
++Extra Header End\
++Extra Header Start\
++Extra Header End'
++with open('/home/guo/script/tscancode202105121758.xml') as lines:
++    f = lines.readlines()
++    if text in f:
++        text=''
++    lines.close()'''
++print('请输入要处理的文件路径：')
++file_name = input()
++csv_header = ['file','line','id','subid','severity','msg','web_identify','func_info','content']
++
++doc=minidom.parse(file_name) #先把xml文件加载进来
++                   
++root=doc.documentElement#解析根元素
++print(root.nodeName,',',root.nodeValue,',',root.nodeType)               #获取元素的根节点
++errors=root.getElementsByTagName('error')
++total_list = []
++if errors :
++    for error in errors:
++        alist = []        
++        '''print('文件名是：%s'% error.getAttribute('file'))
++        print('报错行是：%s'% error.getAttribute('line'))
++        print('错误大类是：%s'% error.getAttribute('id'))
++        print('错误小类是：%s'% error.getAttribute('subid'))
++        print('错误级别：%s'% error.getAttribute('severity'))
++        print('错误信息：%s'% error.getAttribute('msg'))
++        print('网络标识：%s'% error.getAttribute('web_identify'))
++        print('出错方法：%s'% error.getAttribute('func_info'))
++        print('内容：%s'% error.getAttribute('content'))'''
++        alist.append(error.getAttribute('file'))
++        alist.append(error.getAttribute('line'))
++        alist.append(error.getAttribute('id'))
++        alist.append(error.getAttribute('subid'))
++        alist.append(error.getAttribute('severity'))
++        alist.append(error.getAttribute('msg'))
++        alist.append(error.getAttribute('web_identify'))
++        alist.append(error.getAttribute('func_info'))
++        alist.append(error.getAttribute('content'))
++        total_list.append(alist)
++    #print(total_list)
++    #print(total_list[2])
++    df = pd.DataFrame(total_list, columns=csv_header)
++    df.to_excel('Tscancode_'+datetime.datetime.now().strftime("%Y%m%d%H%M")+'.xlsx', index=None)
++    print('文件处理完成！')
++else:
++    print('文件为空，请核实！')
++
++
++
++
+-- 
+2.7.4
+
