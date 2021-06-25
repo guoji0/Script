@@ -1,1 +1,0 @@
-/home/guo/cppcheck/cppcheck-2.4.1
