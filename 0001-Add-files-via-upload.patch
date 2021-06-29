@@ -1,0 +1,24 @@
+From aa9cc9741be31edd7b6331864585c97fe3eb8029 Mon Sep 17 00:00:00 2001
+From: guoji1314 <83851809+guoji1314@users.noreply.github.com>
+Date: Fri, 14 May 2021 16:56:35 +0800
+Subject: [PATCH 1/3] Add files via upload
+
+---
+ cppcheck.sh | 5 +++++
+ 1 file changed, 5 insertions(+)
+ create mode 100644 cppcheck.sh
+
+diff --git a/cppcheck.sh b/cppcheck.sh
+new file mode 100644
+index 0000000..1f0ca76
+--- /dev/null
++++ b/cppcheck.sh
+@@ -0,0 +1,5 @@
++#bin/bash
++cd ~/cppcheck/cppcheck-2.4.1
++echo 'cppcheck安装目录为：'
++pwd
++cppcheck --enable=all  $1 >~/$2/cppcheck_`date +%Y%m%d%H%M`.txt 2>&1
+-- 
+2.7.4
+

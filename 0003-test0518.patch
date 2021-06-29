@@ -1,0 +1,77 @@
+From 7b2bd7a67b8954ee9c914bd84be002d74b39602c Mon Sep 17 00:00:00 2001
+From: "ji.guo" <ji.guo@shmastermatrix.com>
+Date: Tue, 18 May 2021 10:15:16 +0800
+Subject: [PATCH 3/3] test0518
+
+---
+ cppcheck.sh          | 5 -----
+ script/0514test.py   | 0
+ script/cppcheck.sh   | 0
+ script/first.py      | 0
+ script/givenArgs.sh  | 0
+ script/helloworld.sh | 0
+ script/np.py         | 0
+ script/pd.py         | 0
+ script/test.txt      | 1 +
+ script/tscancode.sh  | 0
+ script/xml_split.py  | 0
+ 11 files changed, 1 insertion(+), 5 deletions(-)
+ delete mode 100644 cppcheck.sh
+ mode change 100644 => 100755 script/0514test.py
+ mode change 100644 => 100755 script/cppcheck.sh
+ mode change 100644 => 100755 script/first.py
+ mode change 100644 => 100755 script/givenArgs.sh
+ mode change 100644 => 100755 script/helloworld.sh
+ mode change 100644 => 100755 script/np.py
+ mode change 100644 => 100755 script/pd.py
+ mode change 100644 => 100755 script/tscancode.sh
+ mode change 100644 => 100755 script/xml_split.py
+
+diff --git a/cppcheck.sh b/cppcheck.sh
+deleted file mode 100644
+index 1f0ca76..0000000
+--- a/cppcheck.sh
++++ /dev/null
+@@ -1,5 +0,0 @@
+-#bin/bash
+-cd ~/cppcheck/cppcheck-2.4.1
+-echo 'cppcheck安装目录为：'
+-pwd
+-cppcheck --enable=all  $1 >~/$2/cppcheck_`date +%Y%m%d%H%M`.txt 2>&1
+diff --git a/script/0514test.py b/script/0514test.py
+old mode 100644
+new mode 100755
+diff --git a/script/cppcheck.sh b/script/cppcheck.sh
+old mode 100644
+new mode 100755
+diff --git a/script/first.py b/script/first.py
+old mode 100644
+new mode 100755
+diff --git a/script/givenArgs.sh b/script/givenArgs.sh
+old mode 100644
+new mode 100755
+diff --git a/script/helloworld.sh b/script/helloworld.sh
+old mode 100644
+new mode 100755
+diff --git a/script/np.py b/script/np.py
+old mode 100644
+new mode 100755
+diff --git a/script/pd.py b/script/pd.py
+old mode 100644
+new mode 100755
+diff --git a/script/test.txt b/script/test.txt
+index 1b3f28b..b3ba21f 100644
+--- a/script/test.txt
++++ b/script/test.txt
+@@ -1 +1,2 @@
+ helloWorld!
++你好世界
+diff --git a/script/tscancode.sh b/script/tscancode.sh
+old mode 100644
+new mode 100755
+diff --git a/script/xml_split.py b/script/xml_split.py
+old mode 100644
+new mode 100755
+-- 
+2.7.4
+
