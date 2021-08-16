@@ -1,4 +1,4 @@
-20210810 22:30:20.353976 26009 :0] [Info][LivoxManager:208]:[LivoxManager] The SDK version 2.3.0
+
 I20210810 22:30:20.353981 26009 :0] [Info][LidarManager:19]:[LidarManager] Constructor
 I20210810 22:30:20.354660 26009 :0] [Info][LiDAR:32]:[LiDAR] Constructor
 I20210810 22:30:20.354672 26009 :0] [Info][instantiateLidarLivox:73]:[LidarManager] new LidarLivox 0
