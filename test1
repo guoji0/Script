@@ -33,6 +33,7 @@ I20210810 22:30:20.354764 26009 :0] [Info][LiDAR:32]:[LiDAR] Constructor
 I20210810 22:30:20.354768 26009 :0] [Info][getBufferQueue:1445]:[LivoxManager] invalid index
 I20210810 22:30:20.354771 26009 :0] [Info][instantiateLidarLivox:73]:[LidarManager] new LidarLivox 9
 I20210810 22:30:20.354776 26009 :0] [Info][LiDAR:32]:[LiDAR] Constructor
+7777777777777
 I20210810 22:30:20.354779 26009 :0] [Info][getBufferQueue:1445]:[LivoxManager] invalid index
 I20210810 22:30:20.354782 26009 :0] [Info][instantiateLidarLivox:73]:[LidarManager] new LidarLivox 10
 I20210810 22:30:20.354787 26009 :0] [Info][LiDAR:32]:[LiDAR] Constructor
