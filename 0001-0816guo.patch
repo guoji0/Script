@@ -1,0 +1,23 @@
+From 4bdd38620f331688afdd6bed5d7576ff5afef8b7 Mon Sep 17 00:00:00 2001
+From: "ji.guo" <ji.guo@shmastermatrix.com>
+Date: Mon, 16 Aug 2021 14:45:43 +0800
+Subject: [PATCH] 0816guo
+
+---
+ test1 | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/test1 b/test1
+index b92fae0..24184c6 100644
+--- a/test1
++++ b/test1
+@@ -1,5 +1,5 @@
+ 
+-I20210810 22:30:20.353981 26009 :0] [Info][LidarManager:19]:[LidarManager] Constructor
++
+ I20210810 22:30:20.354660 26009 :0] [Info][LiDAR:32]:[LiDAR] Constructor
+ I20210810 22:30:20.354672 26009 :0] [Info][instantiateLidarLivox:73]:[LidarManager] new LidarLivox 0
+ I20210810 22:30:20.354681 26009 :0] [Info][LiDAR:32]:[LiDAR] Constructor
+-- 
+2.7.4
+
