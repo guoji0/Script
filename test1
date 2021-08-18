@@ -42,5 +42,4 @@ I20210810 22:30:20.354794 26009 :0] [Info][instantiateLidarLivox:73]:[LidarManag
 I20210810 22:30:20.354806 26009 :0] [Info][LiDAR:32]:[LiDAR] Constructor
 I20210810 22:30:20.354810 26009 :0] [Info][getBufferQueue:1445]:[LivoxManager] invalid index
 I20210810 22:30:20.354813 26009 :0] [Info][instantiateLidarLivox:73]:[LidarManager] new LidarLivox 12
-:wq
-
+888888
