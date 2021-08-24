@@ -1,0 +1,22 @@
+From ee8fb0296d33700218181030855af785b6da25ac Mon Sep 17 00:00:00 2001
+From: "ji.guo" <ji.guo@aliyun.com>
+Date: Mon, 16 Aug 2021 14:23:56 +0800
+Subject: [PATCH] deleteji
+
+---
+ test1 | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/test1 b/test1
+index 2a21f2b..b92fae0 100644
+--- a/test1
++++ b/test1
+@@ -1,4 +1,4 @@
+-20210810 22:30:20.353976 26009 :0] [Info][LivoxManager:208]:[LivoxManager] The SDK version 2.3.0
++
+ I20210810 22:30:20.353981 26009 :0] [Info][LidarManager:19]:[LidarManager] Constructor
+ I20210810 22:30:20.354660 26009 :0] [Info][LiDAR:32]:[LiDAR] Constructor
+ I20210810 22:30:20.354672 26009 :0] [Info][instantiateLidarLivox:73]:[LidarManager] new LidarLivox 0
+-- 
+2.7.4
+

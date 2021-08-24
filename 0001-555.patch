@@ -1,0 +1,24 @@
+From ac4752d1e7532ef6f0fcfe320a49fb8b670afb4f Mon Sep 17 00:00:00 2001
+From: "ji.guo" <ji.guo@shmastermatrix.com>
+Date: Mon, 16 Aug 2021 16:15:01 +0800
+Subject: [PATCH] 555
+
+---
+ test1 | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/test1 b/test1
+index 4dda16f..22aef81 100644
+--- a/test1
++++ b/test1
+@@ -12,6 +12,7 @@ I20210810 22:30:20.354696 26009 :0] [Info][instantiateLidarLivox:73]:[LidarManag
+ I20210810 22:30:20.354701 26009 :0] [Info][LiDAR:32]:[LiDAR] Constructor
+ I20210810 22:30:20.354704 26009 :0] [Info][getBufferQueue:1445]:[LivoxManager] invalid index
+ I20210810 22:30:20.354707 26009 :0] [Info][instantiateLidarLivox:73]:[LidarManager] new LidarLivox 3
++55555
+ I20210810 22:30:20.354712 26009 :0] [Info][LiDAR:32]:[LiDAR] Constructor
+ I20210810 22:30:20.354715 26009 :0] [Info][getBufferQueue:1445]:[LivoxManager] invalid index
+ I20210810 22:30:20.354718 26009 :0] [Info][instantiateLidarLivox:73]:[LidarManager] new LidarLivox 4
+-- 
+2.7.4
+
